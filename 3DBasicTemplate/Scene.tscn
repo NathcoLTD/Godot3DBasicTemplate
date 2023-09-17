@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjnea0qejglhg"]
+
+[ext_resource type="Material" uid="uid://ja0515o0fdy3" path="res://Materials/Gold.tres" id="1_cnuq8"]
+[ext_resource type="Material" uid="uid://cs4t03c1c1a78" path="res://Materials/Grass.tres" id="1_u2rhl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j82jl"]
+material = ExtResource("1_cnuq8")
+
+[sub_resource type="BoxMesh" id="BoxMesh_tpcb7"]
+material = ExtResource("1_u2rhl")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ihpud"]
+sky_top_color = Color(0.341176, 0.501961, 0.756863, 1)
+sky_horizon_color = Color(1, 1, 1, 1)
+sky_curve = 0.0675936
+ground_bottom_color = Color(0.364706, 0.470588, 0.713726, 1)
+ground_horizon_color = Color(1, 1, 1, 1)
+ground_curve = 0.00307787
+
+[sub_resource type="Sky" id="Sky_3obw1"]
+sky_material = SubResource("ProceduralSkyMaterial_ihpud")
+
+[sub_resource type="Environment" id="Environment_dhpaw"]
+background_mode = 2
+sky = SubResource("Sky_3obw1")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Scene" type="Node3D"]
+
+[node name="Player" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5.41286)
+
+[node name="Character" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("1_cnuq8")
+mesh = SubResource("BoxMesh_j82jl")
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("BoxMesh_tpcb7")
+
+[node name="Lighting" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.02081)
+
+[node name="Sun" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.999995, -0.00329561, 1.66012e-05, 0.00225482, 0.687842, 0.725857, -0.00240356, -0.725853, 0.687846, 0, 9.03616, 3.07751)
+
+[node name="Lighting" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_dhpaw")

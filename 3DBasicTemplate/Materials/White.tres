@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c2xo6pl7i184h"]
+
+[resource]
+metallic = 1.0
+metallic_specular = 1.0
